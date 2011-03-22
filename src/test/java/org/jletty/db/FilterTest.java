@@ -653,7 +653,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof EqMatchFilter);
 		EqMatchFilter res = (EqMatchFilter) f;
 		assertEquals("cn", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 
 	}
 
@@ -664,7 +664,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof GreaterOrEqualFilter);
 		GreaterOrEqualFilter res = (GreaterOrEqualFilter) f;
 		assertEquals("ou;lang-es", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 
 	}
 
@@ -674,7 +674,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof GreaterOrEqualFilter);
 		GreaterOrEqualFilter res = (GreaterOrEqualFilter) f;
 		assertEquals("ou;lang-es;version-124", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 
 	}
 
@@ -685,7 +685,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof GreaterOrEqualFilter);
 		GreaterOrEqualFilter res = (GreaterOrEqualFilter) f;
 		assertEquals("1.3.4.2;lang-es;version-124", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 
 	}
 
@@ -785,7 +785,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals("ou", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertTrue(res.isDnAttributes());
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
@@ -796,7 +796,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals("1.2.3.4", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertTrue(res.isDnAttributes());
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
@@ -809,7 +809,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals("ou", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertFalse(res.isDnAttributes());
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
@@ -832,7 +832,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals("ou", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertFalse(res.isDnAttributes());
 		assertEquals(null, res.getMatchingRuleId());
 	}
@@ -844,7 +844,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals("1.2.3.4", res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertFalse(res.isDnAttributes());
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
@@ -855,7 +855,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals(null, res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertTrue(res.isDnAttributes());
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
@@ -876,7 +876,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals(null, res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertTrue(res.isDnAttributes());
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
@@ -887,7 +887,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals(null, res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertFalse(res.isDnAttributes());
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
@@ -899,7 +899,7 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof ExtensibleMatchFilter);
 		ExtensibleMatchFilter res = (ExtensibleMatchFilter) f;
 		assertEquals(null, res.getAttrDesc());
-		assertEquals("Gabriel García Márquez", res.getAssertionValueAsString());
+		assertEquals("Gabriel GarcÃ­a MÃ¡rquez", res.getAssertionValueAsString());
 		assertFalse(res.isDnAttributes());
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
