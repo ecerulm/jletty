@@ -7,12 +7,9 @@ package org.jletty.ldapstackldapops;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.jletty.util.EqualsHashCodeTestCase;
+import static org.junit.Assert.*;
 
-import org.jletty.ldapstackldapops.AttributeTypeAndValues;
-import org.jletty.ldapstackldapops.AttributeTypeAndValuesList;
-import org.jletty.ldapstackldapops.AttributeValues;
-
-import junitx.extensions.EqualsHashCodeTestCase;
 
 /**
  * @author $Author: ecerulm $
@@ -20,13 +17,6 @@ import junitx.extensions.EqualsHashCodeTestCase;
  */
 public class AttributeTypeAndValuesListEqualityTest extends EqualsHashCodeTestCase {
 
-	/**
-	 * @param arg0
-	 */
-	public AttributeTypeAndValuesListEqualityTest(String arg0) {
-		super(arg0);
-
-	}
 
 	/*
 	 * (non-Javadoc)

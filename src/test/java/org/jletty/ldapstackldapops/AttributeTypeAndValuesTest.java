@@ -4,10 +4,8 @@
  */
 package org.jletty.ldapstackldapops;
 
-import org.jletty.ldapstackldapops.AttributeTypeAndValues;
-import org.jletty.ldapstackldapops.AttributeValues;
+import org.jletty.util.EqualsHashCodeTestCase;
 
-import junitx.extensions.EqualsHashCodeTestCase;
 
 /**
  * @author Ruben
@@ -15,9 +13,6 @@ import junitx.extensions.EqualsHashCodeTestCase;
  */
 public class AttributeTypeAndValuesTest extends EqualsHashCodeTestCase {
 
-	public AttributeTypeAndValuesTest(String name) {
-		super(name);
-	}
 
 	protected Object createInstance() throws Exception {
 

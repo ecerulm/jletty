@@ -1,34 +1,35 @@
 package org.jletty.encoder;
 
-import org.jletty.encoder.BerOctetString;
 import org.jletty.util.HexUtils;
 
-import junit.framework.TestCase;
-import junitx.framework.ArrayAssert;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 
-public class BerOctetStringTest extends TestCase {
+public class BerOctetStringTest  {
 
-	public void testGetBytes() {
-		ArrayAssert.assertEquals(HexUtils
+	@Test
+        public void testGetBytes() {
+		assertArrayEquals(HexUtils
 				.fromHexString("0414636e3d4469726563746f7279204d616e61676572"),
 				new BerOctetString("cn=Directory Manager").getBytes());
-		ArrayAssert.assertEquals(
+		assertArrayEquals(
 				HexUtils.fromHexString("0408636e3d527562656e"),
 				new BerOctetString("cn=Ruben").getBytes());
-		ArrayAssert.assertEquals(HexUtils.fromHexString("0400"),
+		assertArrayEquals(HexUtils.fromHexString("0400"),
 				new BerOctetString("").getBytes());
-		ArrayAssert.assertEquals(HexUtils
+		assertArrayEquals(HexUtils
 				.fromHexString("0414636e3d4469726563746f7279204d616e61676572"),
 				new BerOctetString("cn=Directory Manager".getBytes()).getBytes());
-		ArrayAssert.assertEquals(
+		assertArrayEquals(
 				HexUtils.fromHexString("0408636e3d527562656e"),
 				new BerOctetString("cn=Ruben".getBytes()).getBytes());
-		ArrayAssert.assertEquals(HexUtils.fromHexString("0400"),
+		assertArrayEquals(HexUtils.fromHexString("0400"),
 				new BerOctetString("".getBytes()).getBytes());
 	}
 	
-	public void testGetBytesBigString() {
+	@Test
+        public void testGetBytesBigString() {
 		String theString = "";
 		String theHexString = "04820477";
 		for (int i = 0; i< 127;i++) {
@@ -37,7 +38,7 @@ public class BerOctetStringTest extends TestCase {
 		}
 		
 		
-		ArrayAssert.assertEquals(HexUtils
+		assertArrayEquals(HexUtils
 				.fromHexString(theHexString),
 				new BerOctetString(theString).getBytes());
 		

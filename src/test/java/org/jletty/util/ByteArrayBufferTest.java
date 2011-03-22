@@ -6,11 +6,9 @@
  */
 package org.jletty.util;
 
-import org.jletty.util.ByteArrayBuffer;
-import org.jletty.util.HexUtils;
 
 import junit.framework.TestCase;
-import junitx.framework.ArrayAssert;
+import static org.junit.Assert.*;
 
 /**
  * @author rlm
@@ -36,7 +34,7 @@ public class ByteArrayBufferTest extends TestCase {
 		byte[] expected = HexUtils.fromHexString("30");
 		// System.out.println("Expected:\n" + HexUtils.toHexString(expected));
 		// System.out.println("Actual:\n" + HexUtils.toHexString(actual));
-		ArrayAssert.assertEquals(expected, actual);
+		assertArrayEquals(expected, actual);
 	}
 
 	/*
@@ -48,7 +46,7 @@ public class ByteArrayBufferTest extends TestCase {
 		byte[] expected = HexUtils.fromHexString("303102");
 		// System.out.println("Expected:\n" + HexUtils.toHexString(expected));
 		// System.out.println("Actual:\n" + HexUtils.toHexString(actual));
-		ArrayAssert.assertEquals(expected, actual);
+		assertArrayEquals(expected, actual);
 	}
 
 	public void testLength() {

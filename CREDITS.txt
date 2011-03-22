@@ -1,0 +1,1 @@
+This product includes software developed by Vladimir R. Bossicard as well as other contributors (http://junit-addons.sourceforge.net/).

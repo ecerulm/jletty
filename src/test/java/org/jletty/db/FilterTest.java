@@ -13,9 +13,8 @@ import java.util.List;
 
 import javax.naming.directory.InvalidSearchFilterException;
 
-import junit.framework.TestCase;
-import junitx.framework.ArrayAssert;
-
+import static org.junit.Assert.*;
+   
 import org.jletty.filterparser.FilterLexer;
 import org.jletty.filterparser.FilterParser;
 import org.jletty.filterparser.FilterValueLexer;
@@ -47,20 +46,22 @@ import antlr.ANTLRException;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import antlr.TokenStreamSelector;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author Ruben
  * 
  */
-public class FilterTest extends TestCase {
+public class FilterTest {
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	protected void setUp() throws Exception {
-		super.setUp();
+    @Before
+	public void setUp() throws Exception {
 
 		Log4jTestsConfigurator.configure();
 		try {
@@ -94,13 +95,15 @@ public class FilterTest extends TestCase {
 		return parser;
 	}
 
+        @Test
 	public void testEqualsFilter() throws Exception {
 		String filter = "(cn=New _Entry)";
 
 		Filter f = parse(filter);
 		assertEquals(filter, f.toString());
 	}
-
+        
+        @Test
 	public void testEqualsFilterTrue() {
 		EqMatchFilter f = new EqMatchFilter("sn", "personsn1");
 
@@ -110,7 +113,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testEqualsFilterFalse() {
+	@Test
+        public void testEqualsFilterFalse() {
 		EqMatchFilter f = new EqMatchFilter("sn", "personsn2");
 
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -119,7 +123,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testEqualsFilterUndefAttrDescNotRecognized() {
+	@Test
+        public void testEqualsFilterUndefAttrDescNotRecognized() {
 		// the attribute description is not recognized by the server
 		EqMatchFilter f = new EqMatchFilter("nonExistenAttrDesc", "personsn2");
 
@@ -129,7 +134,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testEqualsFilterUndefAssertionValueCannotBeParsed() {
+	@Test
+        public void testEqualsFilterUndefAssertionValueCannotBeParsed() {
 		// the assertion value cannot be parsed
 		byte[] assertionValue = HexUtils.fromHexString("80 10 aa bb");
 		EqMatchFilter f = new EqMatchFilter("sn", assertionValue);
@@ -139,13 +145,15 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testAll() throws Exception {
+	@Test
+        public void testAll() throws Exception {
 		String filter = "(|(&(cn=value1)(dnQualifier<=value2)(cn~=value3)(cn=*val*ue*4*))(!(cn=value5)))";
 		Filter f = parse(filter);
 		assertEquals(filter, f.toString());
 	}
 
-	public void testGreaterOrEqualsFilterTrue1() {
+	@Test
+        public void testGreaterOrEqualsFilterTrue1() {
 		setUpSchemaNotStandard();
 
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter("sn", "personsn0");
@@ -155,7 +163,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testGreaterOrEqualsFilterTrue2() {
+	@Test
+        public void testGreaterOrEqualsFilterTrue2() {
 		setUpSchemaNotStandard();
 
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter("sn", "personsn1");
@@ -165,7 +174,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testGreaterOrEqualsFilterFalse() {
+	@Test
+        public void testGreaterOrEqualsFilterFalse() {
 		setUpSchemaNotStandard();
 
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter("sn", "personsn3");
@@ -175,7 +185,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
-	public void testGreaterOrEqualsFilterUndef() {
+	@Test
+        public void testGreaterOrEqualsFilterUndef() {
 		// attr desc not recognized
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter(
 				"attrDescNotRecognized", "personsn0");
@@ -184,7 +195,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testGreaterOrEqualsFilterUndefNoOrderingMatchRule() {
+	@Test
+        public void testGreaterOrEqualsFilterUndefNoOrderingMatchRule() {
 		// sn has no orderingMatchRule
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter("sn", "personsn0");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -192,7 +204,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testGreaterOrEqualsFilterUndefAssertionValueCannotBeParsed() {
+	@Test
+        public void testGreaterOrEqualsFilterUndefAssertionValueCannotBeParsed() {
 		byte[] assertionValue = HexUtils.fromHexString("80 10 aa bb");
 		GreaterOrEqualFilter f = new GreaterOrEqualFilter("sn", assertionValue);
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -200,7 +213,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterTrue1() {
+	@Test
+        public void testLessOrEqualsFilterTrue1() {
 		setUpSchemaNotStandard();
 
 		LessOrEqualFilter f = new LessOrEqualFilter("sn", "another_personsn2");
@@ -210,7 +224,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterTrue2() {
+	@Test
+        public void testLessOrEqualsFilterTrue2() {
 		setUpSchemaNotStandard();
 
 		LessOrEqualFilter f = new LessOrEqualFilter("sn", "another_personsn1");
@@ -220,7 +235,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterFalse() {
+	@Test
+        public void testLessOrEqualsFilterFalse() {
 		setUpSchemaNotStandard();
 
 		LessOrEqualFilter f = new LessOrEqualFilter("sn", "another_personsn0");
@@ -230,7 +246,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterUndef() {
+	@Test
+        public void testLessOrEqualsFilterUndef() {
 		// attr desc not recognized
 		LessOrEqualFilter f = new LessOrEqualFilter("attrDescNotRecognized",
 				"personsn0");
@@ -239,7 +256,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterUndefNoOrderingMatchRule() {
+	@Test
+        public void testLessOrEqualsFilterUndefNoOrderingMatchRule() {
 		// sn has no orderingMatchRule
 		LessOrEqualFilter f = new LessOrEqualFilter("sn", "personsn0");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -247,7 +265,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testLessOrEqualsFilterUndefAssertionValueCannotBeParsed() {
+	@Test
+        public void testLessOrEqualsFilterUndefAssertionValueCannotBeParsed() {
 		byte[] assertionValue = HexUtils.fromHexString("80 10 aa bb");
 		LessOrEqualFilter f = new LessOrEqualFilter("sn", assertionValue);
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -255,28 +274,32 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testApproxFilterTrue() {
+	@Test
+        public void testApproxFilterTrue() {
 		ApproxMatchFilter f = new ApproxMatchFilter("sn", "personnsn1");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
 				"o=org1,c=US");
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testApproxFilterFalse() {
+	@Test
+        public void testApproxFilterFalse() {
 		ApproxMatchFilter f = new ApproxMatchFilter("sn", "doesntmatch");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
 				"o=org1,c=US");
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
-	public void testApproxFilterUndefUnrecognizedAttrDesc() {
+	@Test
+        public void testApproxFilterUndefUnrecognizedAttrDesc() {
 		ApproxMatchFilter f = new ApproxMatchFilter("snNotExist", "personsn1");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
 				"o=org1,c=US");
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testApproxFilterUndefAttributeValueCannotBeParsed() {
+	@Test
+        public void testApproxFilterUndefAttributeValueCannotBeParsed() {
 		byte[] assertionValue = HexUtils.fromHexString("80 10 aa bb");
 		ApproxMatchFilter f = new ApproxMatchFilter("sn", assertionValue);
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -284,7 +307,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testItemFilter() throws Exception {
+	@Test
+        public void testItemFilter() throws Exception {
 		String filter = "( ou ~=people)";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -294,7 +318,8 @@ public class FilterTest extends TestCase {
 		assertEquals("people", res.getAssertionValueAsString());
 	}
 
-	public void testAndFilter() throws Exception {
+	@Test
+        public void testAndFilter() throws Exception {
 		String filter = "(&(ou~=people)(dnQualifier>=30)) ";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -303,14 +328,16 @@ public class FilterTest extends TestCase {
 		assertEquals(2, res.getChildren().size());
 	}
 
-	public void testAndFilter3Elements() throws Exception {
+	@Test
+        public void testAndFilter3Elements() throws Exception {
 		String filter = "(&(ou~=people)(dnQualifier>=30)(cn=3))";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
 
 	}
 
-	public void testAndFilterTrue() throws Exception {
+	@Test
+        public void testAndFilterTrue() throws Exception {
 		ArrayList list = new ArrayList();
 		list.add(new Filter() {
 			public MatchResult match(LdapEntry entry) {
@@ -342,7 +369,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testAndFilterFalse() throws Exception {
+	@Test
+        public void testAndFilterFalse() throws Exception {
 		ArrayList list = new ArrayList();
 		list.add(new Filter() {
 			public MatchResult match(LdapEntry entry) {
@@ -374,7 +402,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
-	public void testAndFilterUndef() throws Exception {
+	@Test
+        public void testAndFilterUndef() throws Exception {
 		ArrayList list = new ArrayList();
 		list.add(new Filter() {
 			public MatchResult match(LdapEntry entry) {
@@ -406,19 +435,22 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
-	public void testAndFilter2OrFilters() throws Exception {
+	@Test
+        public void testAndFilter2OrFilters() throws Exception {
 		String filter = "(&(|(ou=people)(dnQualifier>=30))(|(cn=3)(cn=2))) ";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
 	}
 
-	public void testNotFilterComplex() throws Exception {
+	@Test
+        public void testNotFilterComplex() throws Exception {
 		String filter = "(|(&(ou=value1)(cn<=value2)(sn~=value3)))";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
 	}
 
-	public void testNotFilterTrue() {
+	@Test
+        public void testNotFilterTrue() {
 		Filter inputFilter = new Filter() {
 			public MatchResult match(LdapEntry entry) {
 				return MatchResult.FALSE;
@@ -433,6 +465,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
+        @Test
 	public void testNotFilterFalse() {
 
 		Filter inputFilter = new Filter() {
@@ -449,6 +482,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
+        @Test
 	public void testNotFilterUndef() {
 		Filter inputFilter = new Filter() {
 			public MatchResult match(LdapEntry entry) {
@@ -464,6 +498,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
+        @Test
 	public void testOrFilter() throws Exception {
 		String filter = "(| ( ou ~=people) (dnQualifier>=30) ) ";
 		Filter f = parse(filter);
@@ -474,6 +509,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testOrFilterTrue() {
 		// A filter of the "or" choice is FALSE if all
 		// of the filters in the SET OF evaluate to FALSE, TRUE if at least
@@ -509,6 +545,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
+        @Test
 	public void testOrFilterFalse() {
 		// A filter of the "or" choice is FALSE if all
 		// of the filters in the SET OF evaluate to FALSE, TRUE if at least
@@ -544,6 +581,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
+        @Test
 	public void testOrFilterUndef() {
 		// A filter of the "or" choice is FALSE if all
 		// of the filters in the SET OF evaluate to FALSE, TRUE if at least
@@ -579,6 +617,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, f.match(entry));
 	}
 
+        @Test
 	public void testNotFilter() throws Exception {
 		String filter = "( ! (& ( ou ~=people) (dnQualifier>=30)) )";
 		Filter f = parse(filter);
@@ -588,6 +627,7 @@ public class FilterTest extends TestCase {
 		assertTrue(res.getChild() instanceof AndFilter);
 	}
 
+        @Test
 	public void testEscapeStarSubstring() throws Exception {
 		String filter = "(cn=*\\2a*)";
 		Filter f = parse(filter);
@@ -600,6 +640,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testEscapeStarEquals() throws Exception {
 		String filter = "(cn=\\2A)";
 		Filter f = parse(filter);
@@ -611,6 +652,7 @@ public class FilterTest extends TestCase {
 		assertEquals("*", res.getAssertionValueAsString());
 	}
 
+        @Test
 	public void testEscapeParens() throws Exception {
 		String filter = "(o=Parens R Us \\28for all your parenthetical needs\\29)";
 		Filter f = parse(filter);
@@ -623,6 +665,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testEscapeSlash1() throws Exception {
 		String filter = "(cn=C:\\5cMyFile)";
 		Filter f = parse(filter);
@@ -633,6 +676,7 @@ public class FilterTest extends TestCase {
 		assertEquals("C:\\MyFile", res.getAssertionValueAsString());
 	}
 
+        @Test
 	public void testEscapeSlash2() throws Exception {
 		String filter = "(cn=\\00\\00\\00\\04))";
 		Filter f = parse(filter);
@@ -640,13 +684,15 @@ public class FilterTest extends TestCase {
 		assertTrue(f instanceof EqMatchFilter);
 		EqMatchFilter res = (EqMatchFilter) f;
 		assertEquals("cn", res.getAttrDesc());
-		ArrayAssert.assertEquals(new byte[] { 0, 0, 0, 4 }, res
+                
+		assertArrayEquals(new byte[] { 0, 0, 0, 4 }, res
 				.getAssertionValue());
 		//      
 		//      
 
 	}
 
+        @Test
 	public void testEscapeSlash3() throws Exception {
 		String filter = "(cn=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -657,7 +703,7 @@ public class FilterTest extends TestCase {
 
 	}
 
-	//
+	@Test
 	public void testOptionAndEscapesFilter() throws Exception {
 		String filter = "( ou;lang-es >=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -668,6 +714,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testOptionsAndEscapesFilter() throws Exception {
 		String filter = "( ou;lang-es;version-124 >=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -678,6 +725,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testNumericoidOptionsAndEscapesFilter() throws Exception {
 
 		String filter = "( 1.3.4.2;lang-es;version-124 >=Gabriel Garc\\eda M\\e1rquez)";
@@ -689,6 +737,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testPresentFilter() throws Exception {
 
 		String filter = "( ou =*)";
@@ -720,6 +769,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testPresentFilterTrue() {
 		PresentFilter f = new PresentFilter("sn");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -728,6 +778,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
+        @Test
 	public void testPresentFilterFalse() {
 		PresentFilter f = new PresentFilter("serialNumber");
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -736,6 +787,7 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, f.match(entry));
 	}
 
+        @Test
 	public void testNumericoidPresentFilter() throws Exception
 
 	{
@@ -769,6 +821,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testEqualsWithForwardSlashFilter() throws Exception {
 		String filter = "( ou =people/in/my/company)";
 		Filter f = parse(filter);
@@ -779,6 +832,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testExtensibleFilterForm1() throws Exception {
 		String filter = "( ou :dn :stupidMatch :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -790,6 +844,7 @@ public class FilterTest extends TestCase {
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm1WithNumericOid() throws Exception {
 		String filter = "( 1.2.3.4 :dn :1.3434.23.2 :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -801,6 +856,7 @@ public class FilterTest extends TestCase {
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm1NoDnAttr() throws Exception
 
 	{
@@ -814,6 +870,7 @@ public class FilterTest extends TestCase {
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm1OptionOnRule() throws Exception {
 		try {
 			String filter = "( ou:stupidMatch;lang-es :=Gabriel Garc\\eda M\\e1rquez)";
@@ -825,6 +882,7 @@ public class FilterTest extends TestCase {
 
 	}
 
+        @Test
 	public void testExtensibleFilterForm1NoAttrNoMatchingRule()
 			throws Exception {
 		String filter = "( ou :=Gabriel Garc\\eda M\\e1rquez)";
@@ -837,6 +895,7 @@ public class FilterTest extends TestCase {
 		assertEquals(null, res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm1NoDnAttrWithNumericOidNoAttr()
 			throws Exception {
 		String filter = "( 1.2.3.4 :1.3434.23.2 :=Gabriel Garc\\eda M\\e1rquez)";
@@ -849,6 +908,7 @@ public class FilterTest extends TestCase {
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm2() throws Exception {
 		String filter = "( :dn :stupidMatch :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -860,6 +920,7 @@ public class FilterTest extends TestCase {
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm2OptionOnRule() throws Exception {
 		try {
 			String filter = "( :dn :stupidMatch;lang-en :=Gabriel Garc\\eda M\\e1rquez)";
@@ -870,6 +931,7 @@ public class FilterTest extends TestCase {
 		}
 	}
 
+        @Test
 	public void testExtensibleFilterForm2WithNumericOid() throws Exception {
 		String filter = "( :dn :1.3434.23.2 :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -881,6 +943,7 @@ public class FilterTest extends TestCase {
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
 
+        @Test
 	public void testExtensibleFilterForm2NoDnAttr() throws Exception {
 		String filter = "( :stupidMatch :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -892,7 +955,8 @@ public class FilterTest extends TestCase {
 		assertEquals("stupidMatch", res.getMatchingRuleId());
 	}
 
-	public void testExtensibleFilterForm2NoDnAttrWithNumericOidNoAttr()
+	@Test
+        public void testExtensibleFilterForm2NoDnAttrWithNumericOidNoAttr()
 			throws Exception {
 		String filter = "( :1.3434.23.2 :=Gabriel Garc\\eda M\\e1rquez)";
 		Filter f = parse(filter);
@@ -904,7 +968,8 @@ public class FilterTest extends TestCase {
 		assertEquals("1.3434.23.2", res.getMatchingRuleId());
 	}
 
-	public void testExtensibleFilterNoAttributeNoMatchingRuleThrowsException()
+	@Test
+        public void testExtensibleFilterNoAttributeNoMatchingRuleThrowsException()
 			throws Exception {
 		String filter = "( :dn :=Gabriel Garc\\eda M\\e1rquez)";
 		try {
@@ -925,7 +990,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterTrue1() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue1() throws Exception {
 		String filter = "( sn:caseIgnoreMatch :=PERsonsn1)";
 		Filter f = parse(filter);
 		assertTrue(f instanceof ExtensibleMatchFilter);
@@ -936,7 +1002,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterFalse1() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse1() throws Exception {
 		String filter = "( sn:caseIgnoreMatch :=PERsonsn2)";
 		Filter f = parse(filter);
 		assertTrue(f instanceof ExtensibleMatchFilter);
@@ -947,7 +1014,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterTrue2() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue2() throws Exception {
 		String filter = "( sn:2.5.13.2 :=PERsonsn1)";
 		Filter f = parse(filter);
 		assertTrue(f instanceof ExtensibleMatchFilter);
@@ -958,7 +1026,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterFalse2() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse2() throws Exception {
 		String filter = "( sn:2.5.13.5 :=PERsonsn1)"; // caseExactMatch will
 		// not match personsn1
 		Filter f = parse(filter);
@@ -970,7 +1039,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterTrue3() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue3() throws Exception {
 		String filter = "( sn:dn:caseIgnoreMatch :=PERsonCn1)"; // cn=personcn1
 		// should match
 		Filter f = parse(filter);
@@ -987,7 +1057,8 @@ public class FilterTest extends TestCase {
 		// fail();
 	}
 
-	public void testExtensibleMatchFilterFalse3() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse3() throws Exception {
 		String filter = "( sn:dn:caseExactMatch :=PERsonCn1)"; // cn=personcn1
 		// should match
 		Filter f = parse(filter);
@@ -1004,7 +1075,8 @@ public class FilterTest extends TestCase {
 		// fail();
 	}
 
-	public void testExtensibleMatchFilterTrue3MultivaluedRdn() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue3MultivaluedRdn() throws Exception {
 		// cn=personcn1+telephonenumber=\\+41 1 268 1540 should match
 		String filter = "( sn:dn:telephoneNumberMatch :=+41 1 268 1540)";
 		Filter f = parse(filter);
@@ -1015,7 +1087,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterFalse3MultivaluedRdn()
+	@Test
+        public void testExtensibleMatchFilterFalse3MultivaluedRdn()
 			throws Exception {
 		String filter = "( sn:dn:caseIgnoreMatch :=personsn2)"; // telephone
 		// will not
@@ -1028,7 +1101,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterTrue4() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue4() throws Exception {
 		String filter = "( sn:dn :=personcn1)"; // same but with a dnAttrs
 		// without matchingrule
 		Filter f = parse(filter);
@@ -1041,7 +1115,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterFalse4() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse4() throws Exception {
 		String filter = "( sn:dn :=personcn2)"; // same but with a dnAttrs
 		// without matchingrule
 		Filter f = parse(filter);
@@ -1054,7 +1129,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterTrue5() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue5() throws Exception {
 		// should match any attribute that can do "2.5.13.2"/CASE_IGNORE_MATCH
 		// as matchingRule
 		String filter = "( :2.5.13.2 :=PERsonsn1)";
@@ -1069,7 +1145,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterTrue6() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue6() throws Exception {
 		// should match any attribute that can do "2.5.13.2"/CASE_IGNORE_MATCH
 		// as matchingRule looking in dn also
 		String filter = "( :dn:2.5.13.2 :=PerSoNCn1)";
@@ -1083,7 +1160,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterFalse6() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse6() throws Exception {
 		// should match any attribute that can do "2.5.13.5"/CASE_EXACT_MATCH
 		// as matchingRule looking in dn also, but will not match
 		String filter = "( :dn:2.5.13.5 :=PerSoNCn1)";
@@ -1097,7 +1175,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterTrue7() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterTrue7() throws Exception {
 		// should match with equalityMatch caseIgnoreMatch the sn
 		String filter = "( sn :=personsn1)";
 		Filter f = parse(filter);
@@ -1109,7 +1188,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterFalse7() throws Exception {
+	@Test
+        public void testExtensibleMatchFilterFalse7() throws Exception {
 		// should match with equalityMatch caseIgnoreMatch for sn attribute, but
 		// will not match
 		String filter = "( sn :=personSn2)";
@@ -1122,7 +1202,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.FALSE, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule1()
+	@Test
+        public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule1()
 			throws Exception {
 		// unrecognized matchingRuleId
 		String filter = "( :1.1.1.1 :=PERsonsn1)";
@@ -1136,7 +1217,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule2()
+	@Test
+        public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule2()
 			throws Exception {
 		// unrecognized matchingRuleId
 		String filter = "( :dn:1.1.1.1 :=PERsonsn1)";
@@ -1150,7 +1232,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule3()
+	@Test
+        public void testExtensibleMatchFilterUndefUnrecognizedMatchingRule3()
 			throws Exception {
 		// unrecognized matchingRuleId
 		String filter = "( sn:dn:1.1.1.1 :=PERsonsn1)";
@@ -1164,7 +1247,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterUndefUnparseableAssertionValue()
+	@Test
+        public void testExtensibleMatchFilterUndefUnparseableAssertionValue()
 			throws Exception {
 		// value not parseable
 		String filter = "( sn:dn:2.5.13.8 :=nonumericstring)"; // matching rule
@@ -1179,7 +1263,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.UNDEF, res.match(entry));
 	}
 
-	public void testExtensibleMatchFilterUndefMatchingRuleNotSupportedByAttribute()
+	@Test
+        public void testExtensibleMatchFilterUndefMatchingRuleNotSupportedByAttribute()
 			throws Exception {
 		// unsuported matching rule for this attribute
 		String filter = "( sn:2.5.13.8 :=54333)"; // matching rule
@@ -1195,7 +1280,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterUndefMatchingRuleNotSupportedByAttributeNorDN()
+	@Test
+        public void testExtensibleMatchFilterUndefMatchingRuleNotSupportedByAttributeNorDN()
 			throws Exception {
 		// unsuported matching rule for this attribute
 		String filter = "( sn:dn:2.5.13.8 :=54333)"; // matching rule
@@ -1211,7 +1297,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testExtensibleMatchFilterTrueMatchingRuleNotSupportedByDnAttributeOnly()
+	@Test
+        public void testExtensibleMatchFilterTrueMatchingRuleNotSupportedByDnAttributeOnly()
 			throws Exception {
 		// unsuported matching rule for this attribute
 		String filter = "( sn:dn:2.5.13.8 :=54333)"; // matching rule
@@ -1227,7 +1314,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testReuseParser() throws Exception {
+	@Test
+        public void testReuseParser() throws Exception {
 		PipedInputStream is = new PipedInputStream();
 		PipedOutputStream out = new PipedOutputStream(is);
 
@@ -1268,7 +1356,8 @@ public class FilterTest extends TestCase {
 		parse(parser, out, "( :1.3434.23.2 := dummyAssertion\\23\\ac )");
 	}
 
-	public void testEmptyString() throws Exception {
+	@Test
+        public void testEmptyString() throws Exception {
 		try {
 			assertNull(parse(""));
 			fail("should throw InvalidSearchFilterException");
@@ -1278,7 +1367,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testSubstringNoAnyNoFinal() throws Exception {
+	@Test
+        public void testSubstringNoAnyNoFinal() throws Exception {
 		String filter = "( ou = foo* )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1292,7 +1382,8 @@ public class FilterTest extends TestCase {
 		assertEquals(null, res.getFin());
 	}
 
-	public void testSubstringNoAny() throws Exception {
+	@Test
+        public void testSubstringNoAny() throws Exception {
 		String filter = "( ou = foo*bar )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1306,7 +1397,8 @@ public class FilterTest extends TestCase {
 		assertEquals("bar", res.getFin());
 	}
 
-	public void testSubstringNoAnyNoIni() throws Exception {
+	@Test
+        public void testSubstringNoAnyNoIni() throws Exception {
 		String filter = "( ou = *bar )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1321,7 +1413,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testSubstringOneAny() throws Exception {
+	@Test
+        public void testSubstringOneAny() throws Exception {
 		String filter = "( ou = foo*guy*bar )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1336,7 +1429,8 @@ public class FilterTest extends TestCase {
 		assertEquals("bar", res.getFin());
 	}
 
-	public void testSubstringManyAny() throws Exception {
+	@Test
+        public void testSubstringManyAny() throws Exception {
 		String filter = "( ou =a*b*c*d*e*f )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1355,7 +1449,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testSubstringNoIniManyAny() throws Exception {
+	@Test
+        public void testSubstringNoIniManyAny() throws Exception {
 		String filter = "( ou =*b*c*d*e*f )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1374,7 +1469,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testSubstringManyAnyNoFinal() throws Exception {
+	@Test
+        public void testSubstringManyAnyNoFinal() throws Exception {
 		String filter = "( ou =a*b*c*d*e* )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1392,7 +1488,8 @@ public class FilterTest extends TestCase {
 		assertEquals(null, res.getFin());
 	}
 
-	public void testSubstringNoIniManyAnyNoFinal() throws Exception {
+	@Test
+        public void testSubstringNoIniManyAnyNoFinal() throws Exception {
 		String filter = "( ou = *b*c*d*e* )";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1410,7 +1507,8 @@ public class FilterTest extends TestCase {
 		assertEquals(null, res.getFin());
 	}
 
-	public void testSubstringNoAnyDoubleSpaceStar() throws Exception {
+	@Test
+        public void testSubstringNoAnyDoubleSpaceStar() throws Exception {
 		String filter = "( ou = foo* *bar )";
 		Filter f = parse(filter);
 		assertEquals("(ou=foo*bar)", f.toString());
@@ -1422,7 +1520,8 @@ public class FilterTest extends TestCase {
 		assertEquals("bar", res.getFin());
 	}
 
-	public void testSubstringAnyDoubleSpaceStar() throws Exception {
+	@Test
+        public void testSubstringAnyDoubleSpaceStar() throws Exception {
 		String filter = "( ou = foo* a *bar )";
 		Filter f = parse(filter);
 		assertEquals("(ou=foo*a*bar)", f.toString());
@@ -1435,7 +1534,8 @@ public class FilterTest extends TestCase {
 		assertEquals("bar", res.getFin());
 	}
 
-	public void testSubstringStarAnyStar() throws Exception {
+	@Test
+        public void testSubstringStarAnyStar() throws Exception {
 		String filter = "( ou =*foo*)";
 		Filter f = parse(filter);
 		assertEquals(filter.replaceAll("\\s", ""), f.toString());
@@ -1448,7 +1548,8 @@ public class FilterTest extends TestCase {
 		assertNull(res.getFin());
 	}
 
-	public void testSubstringFilterInitialTrue() {
+	@Test
+        public void testSubstringFilterInitialTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue("per",
 				(String[]) null, null)); // per*
 
@@ -1458,7 +1559,8 @@ public class FilterTest extends TestCase {
 
 	}
 
-	public void testSubstringFilterInitialFinalTrue() {
+	@Test
+        public void testSubstringFilterInitialFinalTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue("per",
 				(String[]) null, "sn1")); // per*sn1
 
@@ -1467,7 +1569,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterFinalTrue() {
+	@Test
+        public void testSubstringFilterFinalTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue(null,
 				(String[]) null, "sn1")); // *sn1
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -1475,7 +1578,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterInitialAnyFinalrue() {
+	@Test
+        public void testSubstringFilterInitialAnyFinalrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue("p",
 				new String[] { "r", "o", "s" }, "1")); // p*r*o*s*1
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -1483,7 +1587,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterAnyFinalTrue() {
+	@Test
+        public void testSubstringFilterAnyFinalTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue(null,
 				new String[] { "r", "o", "s" }, "1")); // *r*o*s*1
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -1491,7 +1596,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterInitialAnyTrue() {
+	@Test
+        public void testSubstringFilterInitialAnyTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue("p",
 				new String[] { "r", "o", "s" }, null)); // p*r*o*s*
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -1499,7 +1605,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterAnyTrue() {
+	@Test
+        public void testSubstringFilterAnyTrue() {
 		SubstringFilter f = new SubstringFilter("sn", new SubstringValue(null,
 				new String[] { "r", "o", "s" }, null)); // *r*o*s*
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
@@ -1507,7 +1614,8 @@ public class FilterTest extends TestCase {
 		assertEquals(MatchResult.TRUE, f.match(entry));
 	}
 
-	public void testSubstringFilterFalse() {
+	@Test
+        public void testSubstringFilterFalse() {
 		LdapEntry entry = TestUtils.createLdapEntryForCN_person("person1",
 				"o=org1,c=US");
 
@@ -1541,7 +1649,8 @@ public class FilterTest extends TestCase {
 
 	};
 
-	public void testSubstringFilterUndefAttrDescNotRecog() {
+	@Test
+        public void testSubstringFilterUndefAttrDescNotRecog() {
 		// attr desc not recognized
 
 		SubstringFilter f = new SubstringFilter("snAttrDescNotRecognized",

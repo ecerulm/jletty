@@ -7,12 +7,8 @@ package org.jletty.ldapstackldapops;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jletty.ldapstackldapops.AddRequest;
-import org.jletty.ldapstackldapops.AttributeTypeAndValues;
-import org.jletty.ldapstackldapops.AttributeTypeAndValuesList;
-import org.jletty.ldapstackldapops.AttributeValues;
+import org.jletty.util.EqualsHashCodeTestCase;
 
-import junitx.extensions.EqualsHashCodeTestCase;
 
 /**
  * @author Ruben
@@ -20,9 +16,6 @@ import junitx.extensions.EqualsHashCodeTestCase;
  */
 public class AddRequestTest extends EqualsHashCodeTestCase {
 
-	public AddRequestTest(String name) {
-		super(name);
-	}
 
 	protected Object createInstance() throws Exception {
 		List attrs = new LinkedList();

@@ -4,9 +4,8 @@
  */
 package org.jletty.ldapstackldapops;
 
-import org.jletty.ldapstackldapops.AttributeValues;
+import org.jletty.util.EqualsHashCodeTestCase;
 
-import junitx.extensions.EqualsHashCodeTestCase;
 
 /**
  * @author $Author: ecerulm $
@@ -14,13 +13,6 @@ import junitx.extensions.EqualsHashCodeTestCase;
  */
 public class AttributeValuesEqualityTest extends EqualsHashCodeTestCase {
 
-	/**
-	 * @param name
-	 */
-	public AttributeValuesEqualityTest(String name) {
-		super(name);
-
-	}
 
 	/*
 	 * (non-Javadoc)

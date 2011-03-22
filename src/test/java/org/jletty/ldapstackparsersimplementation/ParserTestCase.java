@@ -4,20 +4,21 @@
  */
 package org.jletty.ldapstackparsersimplementation;
 
+import java.util.Arrays;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
 import jletty.performancetest.PerformanceMeasurable;
 import junit.framework.TestCase;
-import junitx.framework.ArrayAssert;
-import junitx.framework.Assert;
 
 import org.jletty.schema.Schema;
 import org.jletty.util.Log4jTestsConfigurator;
-
+import static org.junit.Assert.*;
 /**
  * @author Administrator
  * 
@@ -159,7 +160,7 @@ public abstract class ParserTestCase extends TestCase implements
 				boolean completed = parser.parse(buffer);
 				assertFalse("Returned true when  parsing buffer[" + i
 						+ "], resultReceived = " + resultReceived, completed);
-				Assert.assertNull(
+				assertNull(
 						"The result should be null when parsing buffer no" + i
 								+ " but was " + resultReceived, resultReceived);
 				// depending on the type of information
@@ -202,7 +203,7 @@ public abstract class ParserTestCase extends TestCase implements
 				// doesn't
 				// match with the observed size
 				// e.printStackTrace();
-				Assert.assertNull(resultReceived);
+				assertNull(resultReceived);
 				buffers = getOkBuffers();
 				numCallsSetResult = 0;
 				numCallsSetResultExpected = buffers.length;
@@ -233,7 +234,7 @@ public abstract class ParserTestCase extends TestCase implements
 					assertFalse(parser.parse(emptyBuffer));
 				}
 				assertFalse(completedParse);
-				Assert.assertNull(resultReceived);
+				assertNull(resultReceived);
 				// depending on the type of information
 				// parser it could throw an exception or
 				// simply return false
@@ -279,7 +280,7 @@ public abstract class ParserTestCase extends TestCase implements
 					e.printStackTrace();
 					System.out.println("resultReceived = " + resultReceived);
 				}
-				Assert.assertNull(resultReceived);
+				assertNull(resultReceived);
 			}
 
 			buffers = getOkBuffers();
@@ -454,7 +455,7 @@ public abstract class ParserTestCase extends TestCase implements
 			final Class componentTypeClass = expectedResult.getClass()
 					.getComponentType();
 			if (componentTypeClass.getName() == "byte") {
-				ArrayAssert.assertEquals("while processing buffer " + i,
+				assertArrayEquals("while processing buffer " + i,
 						(byte[]) expectedResult, (byte[]) resultReceived);
 			} else if (componentTypeClass.isArray()) { // byte[][]
 				assertEquals("byte", componentTypeClass.getComponentType()
@@ -476,13 +477,18 @@ public abstract class ParserTestCase extends TestCase implements
 				assertEquals(tmp1, tmp2);
 
 			} else {
-				ArrayAssert.assertEquivalenceArrays("while processing buffer "
+                            
+//				ArrayAssert.assertEquivalenceArrays("while processing buffer "
+//						+ i + "\nexpected: " + expectedResult + "\nactual: "
+//						+ resultReceived, (Object[]) expectedResult,
+//						(Object[]) resultReceived);
+				assertEquals("while processing buffer "
 						+ i + "\nexpected: " + expectedResult + "\nactual: "
-						+ resultReceived, (Object[]) expectedResult,
-						(Object[]) resultReceived);
+						+ resultReceived,  Arrays.asList((Object[]) expectedResult),
+						Arrays.asList((Object[]) resultReceived));
 			}
 		} else {
-			Assert.assertEquals("while processing buffer " + i, expectedResult,
+			assertEquals("while processing buffer " + i, expectedResult,
 					resultReceived);
 		}
 	}

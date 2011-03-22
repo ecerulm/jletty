@@ -11,8 +11,8 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
+import org.jletty.ldapstackparsersimplementation.SearchRequestParserTest;
 
-import junitx.extensions.EqualsHashCodeTestCase;
 
 import org.jletty.schema.AttributeType;
 import org.jletty.schema.AttributeUsage;
@@ -21,15 +21,16 @@ import org.jletty.schema.Schema;
 import org.jletty.schema.Syntax;
 import org.jletty.schema.Syntaxes;
 import org.jletty.schemaparser.Parser;
+import org.jletty.util.EqualsHashCodeTestCase;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import static org.junit.Assert.*;
 
 public class SearchResultEntryEqualsHashCodeTest extends EqualsHashCodeTestCase {
 
-    public SearchResultEntryEqualsHashCodeTest(String name) {
-		super(name);
-	}
 
-	@Override
-	protected void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		//ensure that the Schema is populated before creating instances (instances are created during super.setUp() invocation.
 		Schema schema = Schema.getInstance();
 		schema.clear();
@@ -38,13 +39,12 @@ public class SearchResultEntryEqualsHashCodeTest extends EqualsHashCodeTestCase 
 				"caseIgnoreSubstringsMatch", "1.3.6.1.4.1.1466.115.121.1.15",
 				32768, false, false, false, AttributeUsage.USER_APPLICATIONS);
 		schema.addAttributeType(nameAttrType);
-		InputStream schemaStream = getClass().getResourceAsStream(
+		InputStream schemaStream = SearchResultEntryEqualsHashCodeTest.class.getResourceAsStream(
 		"/org/jletty/db/schema/schemas/core.schema");
 		assertNotNull(schemaStream);
 		
 		Parser.parse(schemaStream, schema);
 		schema.resolveDependencies();
-		super.setUp(); 
 	}
 
 	protected Object createInstance() throws Exception {
