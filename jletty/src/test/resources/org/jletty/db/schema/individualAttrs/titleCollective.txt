@@ -1,0 +1,4 @@
+attributetype ( 2.5.4.12 NAME 'title'
+	DESC 'RFC2256: title associated with the entity'
+	SUP name 
+	COLLECTIVE)

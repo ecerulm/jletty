@@ -1,0 +1,3 @@
+String url = "http://ecerulm.dynalias.org/unrestricted/phpproxy/index.php?hl=1111100001&q=http%3A%2F%2Fhotbox_02.libsyn.com%2Fpodcasts%2Fdickwall%2FJavaPosse041.mp3";
+	
+org.apache.commons.lang.StringEscapeUtils.escapeXml(url);(java.lang.String) http://ecerulm.dynalias.org/unrestricted/phpproxy/index.php?hl=1111100001&amp;q=http%3A%2F%2Fhotbox_02.libsyn.com%2Fpodcasts%2Fdickwall%2FJavaPosse041.mp3

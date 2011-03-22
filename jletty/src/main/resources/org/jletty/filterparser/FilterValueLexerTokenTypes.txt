@@ -1,0 +1,3 @@
+// $ANTLR : filtervalue.g -> FilterValueLexerTokenTypes.txt$
+FilterValueLexer    // output token vocab name
+ATTRVALUE=4

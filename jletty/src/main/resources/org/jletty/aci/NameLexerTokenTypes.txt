@@ -1,0 +1,7 @@
+// $ANTLR 2.7.6 (2005-12-22): namelexer.g -> NameLexerTokenTypes.txt$
+NameLexer    // output token vocab name
+WS=4
+DIGIT=5
+ALPHA=6
+KEYCHAR=7
+NAME=8

@@ -1,0 +1,14 @@
+// $ANTLR : filter.g -> FilterTreeParserTokenTypes.txt$
+FilterTreeParser    // output token vocab name
+LPAREN=4
+RPAREN=5
+AND=6
+OR=7
+NOT=8
+ATTRNAME=9
+EQUAL=10
+GREATER=11
+LESS=12
+APPROX=13
+WORD=14
+STAR=15

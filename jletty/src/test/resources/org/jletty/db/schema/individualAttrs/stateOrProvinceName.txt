@@ -1,0 +1,3 @@
+attributetype ( 2.5.4.8 NAME ( 'st' 'stateOrProvinceName' )
+	DESC 'RFC2256: state or province which this object resides in'
+	SUP name )

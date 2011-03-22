@@ -1,0 +1,3 @@
+attributetype ( 2.5.4.10 NAME ( 'o' 'organizationName' )
+	DESC 'RFC2256: organization this object belongs to'
+	SUP name )

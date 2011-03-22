@@ -1,0 +1,4 @@
+objectclass ( 2.5.6.1 NAME 'alias'
+	DESC 'RFC2256: an alias'
+	SUP top STRUCTURAL
+	MUST aliasedObjectName )

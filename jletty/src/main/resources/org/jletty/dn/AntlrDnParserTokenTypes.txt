@@ -1,0 +1,8 @@
+// $ANTLR 2.7.6 (2005-12-22): dnparser.g -> AntlrDnParserTokenTypes.txt$
+AntlrDnParser    // output token vocab name
+ATTRIBUTETYPE=4
+ATTRIBUTEVALUE=5
+WS=6
+COMMA=7
+PLUS=8
+EQUALS=9

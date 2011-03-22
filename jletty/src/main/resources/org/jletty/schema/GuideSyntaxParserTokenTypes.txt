@@ -1,0 +1,19 @@
+// $ANTLR 2.7.6 (2005-12-22): guidesyntaxparser.g -> GuideSyntaxParserTokenTypes.txt$
+GuideSyntaxParser    // output token vocab name
+DASH=4
+OID=5
+DESCSTRING=6
+NOT=7
+LPAREN=8
+DOLLAR=9
+RPAREN=10
+AND=11
+OR=12
+WS=13
+LBRACKET=14
+RBRACKET=15
+ALPHA=16
+LDIGIT=17
+DIGIT=18
+NUMBER=19
+NUMERICOID=20

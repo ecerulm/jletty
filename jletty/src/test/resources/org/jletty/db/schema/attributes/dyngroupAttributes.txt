@@ -1,0 +1,4 @@
+attributetype ( NetscapeLDAPattributeType:198
+	NAME 'memberURL'
+	DESC 'Identifies an URL associated with each member of a group. Any type of labeled URL can be used.'
+	SUP labeledURI )

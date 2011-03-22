@@ -1,0 +1,3 @@
+Common // name of the vocab
+ATTRIBUTETYPE=4
+ATTRIBUTEVALUE=5

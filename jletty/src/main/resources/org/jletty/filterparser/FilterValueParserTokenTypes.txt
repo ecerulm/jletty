@@ -1,0 +1,17 @@
+// $ANTLR 2.7.6 (2005-12-22): filtervalue.g -> FilterValueParserTokenTypes.txt$
+FilterValueParser    // output token vocab name
+ATTRVALUE=4
+RPAREN=5
+STAR=6
+ESC=7
+HEX=8
+ESCAPEDCHAR=9
+NORMAL=10
+UTF1SUBSET=11
+UTF8=12
+UTFMB=13
+UTF0=14
+UTF1=15
+UTF2=16
+UTF3=17
+UTF4=18

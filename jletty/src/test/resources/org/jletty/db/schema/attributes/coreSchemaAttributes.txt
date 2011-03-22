@@ -1,0 +1,283 @@
+#
+# Standard attribute types from RFC 2256
+#
+
+# system schema
+attributetype ( 2.5.4.0 NAME 'objectClass'
+	DESC 'RFC2256: object classes of the entity'
+	EQUALITY objectIdentifierMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.38 )
+
+# system schema
+attributetype ( 2.5.4.1 NAME ( 'aliasedObjectName' 'aliasedEntryName' )
+	DESC 'RFC2256: name of aliased object'
+	EQUALITY distinguishedNameMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 SINGLE-VALUE )
+
+attributetype ( 2.5.4.2 NAME 'knowledgeInformation'
+	DESC 'RFC2256: knowledge information'
+	EQUALITY caseIgnoreMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} )
+
+# system schema
+attributetype ( 2.5.4.3 NAME ( 'cn' 'commonName' )
+	DESC 'RFC2256: common name(s) for which the entity is known by'
+	SUP name )
+
+attributetype ( 2.5.4.4 NAME ( 'sn' 'surname' )
+	DESC 'RFC2256: last (family) name(s) for which the entity is known by'
+	SUP name )
+
+attributetype ( 2.5.4.5 NAME 'serialNumber'
+	DESC 'RFC2256: serial number of the entity'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.44{64} )
+
+attributetype ( 2.5.4.6 NAME ( 'c' 'countryName' )
+	DESC 'RFC2256: ISO-3166 country 2-letter code'
+	SUP name SINGLE-VALUE )
+
+attributetype ( 2.5.4.7 NAME ( 'l' 'localityName' )
+	DESC 'RFC2256: locality which this object resides in'
+	SUP name )
+
+attributetype ( 2.5.4.8 NAME ( 'st' 'stateOrProvinceName' )
+	DESC 'RFC2256: state or province which this object resides in'
+	SUP name )
+
+attributetype ( 2.5.4.9 NAME ( 'street' 'streetAddress' )
+	DESC 'RFC2256: street address of this object'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+attributetype ( 2.5.4.10 NAME ( 'o' 'organizationName' )
+	DESC 'RFC2256: organization this object belongs to'
+	SUP name )
+
+attributetype ( 2.5.4.11 NAME ( 'ou' 'organizationalUnitName' )
+	DESC 'RFC2256: organizational unit this object belongs to'
+	SUP name )
+
+attributetype ( 2.5.4.12 NAME 'title'
+	DESC 'RFC2256: title associated with the entity'
+	SUP name )
+
+attributetype ( 2.5.4.13 NAME 'description'
+	DESC 'RFC2256: descriptive information'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )
+
+# Obsoleted by enhancedSearchGuide
+attributetype ( 2.5.4.14 NAME 'searchGuide'
+	DESC 'RFC2256: search guide, obsoleted by enhancedSearchGuide'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.25 )
+
+attributetype ( 2.5.4.15 NAME 'businessCategory'
+	DESC 'RFC2256: business category'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+attributetype ( 2.5.4.16 NAME 'postalAddress'
+	DESC 'RFC2256: postal address'
+	EQUALITY caseIgnoreListMatch
+	SUBSTR caseIgnoreListSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.41 )
+
+attributetype ( 2.5.4.17 NAME 'postalCode'
+	DESC 'RFC2256: postal code'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{40} )
+
+attributetype ( 2.5.4.18 NAME 'postOfficeBox'
+	DESC 'RFC2256: Post Office Box'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{40} )
+
+attributetype ( 2.5.4.19 NAME 'physicalDeliveryOfficeName'
+	DESC 'RFC2256: Physical Delivery Office Name'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{128} )
+
+attributetype ( 2.5.4.20 NAME 'telephoneNumber'
+	DESC 'RFC2256: Telephone Number'
+	EQUALITY telephoneNumberMatch
+	SUBSTR telephoneNumberSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.50{32} )
+
+attributetype ( 2.5.4.21 NAME 'telexNumber'
+	DESC 'RFC2256: Telex Number'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.52 )
+
+attributetype ( 2.5.4.22 NAME 'teletexTerminalIdentifier'
+	DESC 'RFC2256: Teletex Terminal Identifier'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.51 )
+
+attributetype ( 2.5.4.23 NAME ( 'facsimileTelephoneNumber' 'fax' )
+	DESC 'RFC2256: Facsimile (Fax) Telephone Number'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.22 )
+
+attributetype ( 2.5.4.24 NAME 'x121Address'
+	DESC 'RFC2256: X.121 Address'
+	EQUALITY numericStringMatch
+	SUBSTR numericStringSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.36{15} )
+
+attributetype ( 2.5.4.25 NAME 'internationaliSDNNumber'
+	DESC 'RFC2256: international ISDN number'
+	EQUALITY numericStringMatch
+	SUBSTR numericStringSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.36{16} )
+
+attributetype ( 2.5.4.26 NAME 'registeredAddress'
+	DESC 'RFC2256: registered postal address'
+	SUP postalAddress
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.41 )
+
+attributetype ( 2.5.4.27 NAME 'destinationIndicator'
+	DESC 'RFC2256: destination indicator'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.44{128} )
+
+attributetype ( 2.5.4.28 NAME 'preferredDeliveryMethod'
+	DESC 'RFC2256: preferred delivery method'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.14
+	SINGLE-VALUE )
+
+attributetype ( 2.5.4.29 NAME 'presentationAddress'
+	DESC 'RFC2256: presentation address'
+	EQUALITY presentationAddressMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.43
+	SINGLE-VALUE )
+
+attributetype ( 2.5.4.30 NAME 'supportedApplicationContext'
+	DESC 'RFC2256: supported application context'
+	EQUALITY objectIdentifierMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.38 )
+
+attributetype ( 2.5.4.31 NAME 'member'
+	DESC 'RFC2256: member of a group'
+	SUP distinguishedName )
+
+attributetype ( 2.5.4.32 NAME 'owner'
+	DESC 'RFC2256: owner (of the object)'
+	SUP distinguishedName )
+
+attributetype ( 2.5.4.33 NAME 'roleOccupant'
+	DESC 'RFC2256: occupant of role'
+	SUP distinguishedName )
+
+attributetype ( 2.5.4.34 NAME 'seeAlso'
+	DESC 'RFC2256: DN of related object'
+	SUP distinguishedName )
+
+# system schema
+attributetype ( 2.5.4.35 NAME 'userPassword'
+	DESC 'RFC2256/2307: password of user'
+	EQUALITY octetStringMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.40{128} )
+
+# Must be transferred using ;binary
+# with certificateExactMatch rule (per X.509)
+attributetype ( 2.5.4.36 NAME 'userCertificate'
+	DESC 'RFC2256: X.509 user certificate, use ;binary'
+	EQUALITY certificateExactMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.8 )
+
+# Must be transferred using ;binary
+# with certificateExactMatch rule (per X.509)
+attributetype ( 2.5.4.37 NAME 'cACertificate'
+	DESC 'RFC2256: X.509 CA certificate, use ;binary'
+	EQUALITY certificateExactMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.8 )
+
+# Must be transferred using ;binary
+attributetype ( 2.5.4.38 NAME 'authorityRevocationList'
+	DESC 'RFC2256: X.509 authority revocation list, use ;binary'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.9 )
+
+# Must be transferred using ;binary
+attributetype ( 2.5.4.39 NAME 'certificateRevocationList'
+	DESC 'RFC2256: X.509 certificate revocation list, use ;binary'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.9 )
+
+# Must be stored and requested in the binary form
+attributetype ( 2.5.4.40 NAME 'crossCertificatePair'
+	DESC 'RFC2256: X.509 cross certificate pair, use ;binary'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.10 )
+
+# 2.5.4.41 is defined above as it's used for subtyping
+#attributetype ( 2.5.4.41 NAME 'name'
+#	EQUALITY caseIgnoreMatch
+#	SUBSTR caseIgnoreSubstringsMatch
+#	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} )
+
+attributetype ( 2.5.4.42 NAME ( 'givenName' 'gn' )
+	DESC 'RFC2256: first name(s) for which the entity is known by'
+	SUP name )
+
+attributetype ( 2.5.4.43 NAME 'initials'
+	DESC 'RFC2256: initials of some or all of names, but not the surname(s).'
+	SUP name )
+
+attributetype ( 2.5.4.44 NAME 'generationQualifier'
+	DESC 'RFC2256: name qualifier indicating a generation'
+	SUP name )
+
+attributetype ( 2.5.4.45 NAME 'x500UniqueIdentifier'
+	DESC 'RFC2256: X.500 unique identifier'
+	EQUALITY bitStringMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.6 )
+
+attributetype ( 2.5.4.46 NAME 'dnQualifier'
+	DESC 'RFC2256: DN qualifier'
+	EQUALITY caseIgnoreMatch
+	ORDERING caseIgnoreOrderingMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.44 )
+
+attributetype ( 2.5.4.47 NAME 'enhancedSearchGuide'
+	DESC 'RFC2256: enhanced search guide'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.21 )
+
+attributetype ( 2.5.4.48 NAME 'protocolInformation'
+	DESC 'RFC2256: protocol information'
+	EQUALITY protocolInformationMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.42 )
+
+# 2.5.4.49 is defined above as it's used for subtyping
+attributetype ( 2.5.4.49 NAME 'distinguishedName'
+	EQUALITY distinguishedNameMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.12 )
+
+attributetype ( 2.5.4.50 NAME 'uniqueMember'
+	DESC 'RFC2256: unique member of a group'
+	EQUALITY uniqueMemberMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.34 )
+
+attributetype ( 2.5.4.51 NAME 'houseIdentifier'
+	DESC 'RFC2256: house identifier'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{32768} )
+
+# Must be transferred using ;binary
+attributetype ( 2.5.4.52 NAME 'supportedAlgorithms'
+	DESC 'RFC2256: supported algorithms'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.49 )
+
+# Must be transferred using ;binary
+attributetype ( 2.5.4.53 NAME 'deltaRevocationList'
+	DESC 'RFC2256: delta revocation list; use ;binary'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.9 )
+
+attributetype ( 2.5.4.54 NAME 'dmdName'
+	DESC 'RFC2256: name of DMD'
+	SUP name )

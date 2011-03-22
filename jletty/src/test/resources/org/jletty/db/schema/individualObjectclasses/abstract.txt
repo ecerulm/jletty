@@ -1,0 +1,4 @@
+objectclass ( 2.5.6.1 NAME 'severalSups'
+ DESC 'An objectclass with several parents'
+ SUP (top $ other $ another) ABSTRACT
+ MUST aliasedObjectName )

@@ -1,0 +1,6 @@
+attributetype ( 2.5.4.46 NAME 'dnQualifier'
+	DESC 'RFC2256: DN qualifier'
+	EQUALITY caseIgnoreMatch
+	ORDERING caseIgnoreOrderingMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.44 )

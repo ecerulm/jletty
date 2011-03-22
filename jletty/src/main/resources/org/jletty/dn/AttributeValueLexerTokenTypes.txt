@@ -1,0 +1,18 @@
+// $ANTLR 2.7.6 (2005-12-22): attributevaluelexer.g -> AttributeValueLexerTokenTypes.txt$
+AttributeValueLexer    // output token vocab name
+ATTRIBUTETYPE=4
+ATTRIBUTEVALUE=5
+WS=6
+QUOTATION=7
+DIGIT=8
+ALPHA=9
+HEXCHAR=10
+HEXPAIR=11
+HEXSTRING=12
+PAIR=13
+UTF8SEQ=14
+QUOTECHAR=15
+STRINGCHAR=16
+ESCSP=17
+BEGINNING=18
+STRING=19

@@ -1,0 +1,4 @@
+attributetype ( 2.5.4.6 NAME ( 'c' 'countryName' )
+	DESC 'RFC2256: ISO-3166 country 2-letter code'
+	SUP name SINGLE-VALUE )
+

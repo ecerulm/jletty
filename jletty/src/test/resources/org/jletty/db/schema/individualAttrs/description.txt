@@ -1,0 +1,5 @@
+attributetype ( 2.5.4.13 NAME 'description'
+	DESC 'RFC2256: descriptive information'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024} )

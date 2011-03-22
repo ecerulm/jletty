@@ -1,0 +1,1 @@
+attributetype ( 2.5.4.18 NAME 'postOfficeBox' DESC 'RFC2256: Post Office Box' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{40} )

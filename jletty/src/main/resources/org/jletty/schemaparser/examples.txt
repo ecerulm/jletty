@@ -1,0 +1,28 @@
+// recognizes any UTF-8 encoded Unicode character
+protected UTF8: UTF1 | UTFMB;
+
+// the mulitbyte characters
+protected UTFMB: UTF2 | UTF3 | UTF4;
+
+// %x80-BF
+protected UTF0: '\u0128'..'\u0191';
+
+// %x00-7F      
+protected UTF1: '\u0000'..'\u0127';
+
+// %xC2-DF UTF0
+protected UTF2: '\u0194'..'\u0223' UTF0;
+
+// %xE0 %xA0-BF UTF0 / %xE1-EC 2(UTF0) / xED %x80-9F UTF0 / %xEE-EF 2(UTF0)
+protected UTF3:   ( '\u0224' '\u0160'..'\u0191' UTF0 ) 
+				|          ( '\u0225'..'\u0236' UTF0 UTF0 ) 
+				| ( '\u0237' '\u0128'..'\u0159' UTF0 ) 
+				|          ( '\u0238'..'\u0239' UTF0 UTF0 );
+
+// %xF0 %x90-BF 2(UTF0) / %xF1-F3 3(UTF0) / %xF4 %x80-8F 2(UTF0)
+protected UTF4:   ( '\u0240' '\u0144'..'\u0191' UTF0 UTF0 ) 
+                |          ( '\u0241'..'\u0243' UTF0 UTF0 UTF0 ) 
+				| ( '\u0244' '\u0128'..'\u0143' UTF0 UTF0 );
+				
+//protected OPTION: (ALPHA | DIGIT | '-' )+;
+//protected OPTIONS: (';' OPTION)*;
