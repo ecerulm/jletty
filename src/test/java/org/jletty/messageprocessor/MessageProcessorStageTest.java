@@ -213,7 +213,7 @@ public class MessageProcessorStageTest extends TestCase {
 		eventControl.setReturnValue(handlerMock);
 		eventControl.replay(); // eventControl&eventMock setted and ready
 
-		handlerMock.sendResponse(new ModifyResponse(
+		handlerMock.sendResponse(new BindResponse(
 				LDAPResultCode.INVALID_CREDENTIALS));
 		handlerControl.replay(); // handlerControl setted and ready
 
@@ -3786,7 +3786,7 @@ public class MessageProcessorStageTest extends TestCase {
 		attrs.add(new AttributeTypeAndValues("cn", new AttributeValues().add(
 				"Person2").getValuesAsByteArray()));
 		attrs.add(new AttributeTypeAndValues("sn", new AttributeValues().add(
-				"Jímenez").getValuesAsByteArray()));
+				"Jï¿½menez").getValuesAsByteArray()));
 		attrs.add(new AttributeTypeAndValues("street", new AttributeValues()
 				.add("street1").getValuesAsByteArray()));
 		attrs.add(new AttributeTypeAndValues("telephoneNumber",
