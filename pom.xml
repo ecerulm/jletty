@@ -34,6 +34,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.8</version>
+                <inherited>true</inherited>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -42,10 +43,29 @@
                         <exclude>**/*PerformanceTest.java</exclude>
                         <exclude>**/AllTests.java</exclude>
                     </excludes>
+                    <forkMode>once</forkMode>
+                    <reportFormat>xml</reportFormat>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    
+    <reporting>    
+        <plugins>  
+            <plugin>      
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>emma-maven-plugin</artifactId>
+                <version>1.0-alpha-3</version>
+                <inherited>true</inherited>          
+            </plugin>
+            <plugin> 
+                <groupId>org.codehaus.mojo</groupId> 
+                <artifactId>surefire-report-maven-plugin</artifactId>
+                <version>2.0-beta-1,</version>
+                <inherited>true</inherited>
+            </plugin>       
+        </plugins>      
+    </reporting>  
     <dependencies>
         <dependency>
             <groupId>antlr</groupId>
